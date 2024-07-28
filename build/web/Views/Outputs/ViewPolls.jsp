@@ -9,6 +9,7 @@
         <title>Polls</title>
         <!-- Bootstrap CSS -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <script src="/PollHub/ViewPolls.js" defer></script>
         <style>
             .poll-container {
                 border: 1px solid #ddd;
@@ -76,54 +77,3 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </body>
 </html>
-
-<script type="text/javascript">
-
-    const meters = document.querySelectorAll("meter");
-
-    meters.forEach(meter => {
-        meter.addEventListener("click", event => {
-            let selectedOptionId = event.target.getAttribute("id");
-            let selectedOptionParagraphId = event.target.nextElementSibling.getAttribute("id");
-
-            computeVote(selectedOptionId);
-        });
-    });
-
-    function computeVote(selectedOptionId) {
-
-        const xhr = new XMLHttpRequest();
-        xhr.open("GET", "/PollHub/VoteController?id=" + selectedOptionId, true);
-
-        xhr.onreadystatechange = function () {
-            if (this.status === 200 && this.readyState === 4) {
-
-                const data = JSON.parse(xhr.responseText);
-                let totalPollVotes = data.Total_votes;//total pollVotes
-                const allParagraphs = document.querySelectorAll(".option-container p");
-                Object.keys(data).forEach(function (key) {
-
-                    if (key.substring(key.length - 6, key.length) === "option") {
-                        let optionId = key.substring(0, key.length - 7);//get option id
-
-                        //increases the number of votes output for the poll, the ui
-                        allParagraphs.forEach(paragraph => {
-                            if (paragraph.getAttribute("id") === optionId) {
-                                let meterValue = data[optionId + "-option"];
-                                paragraph.previousElementSibling.value = meterValue;
-                                paragraph.innerHTML = meterValue + "%";//updates view
-                            }
-                        });
-                    }
-                });
-            }
-        };
-
-        xhr.send();
-
-    }
-    ;
-
-
-
-</script>

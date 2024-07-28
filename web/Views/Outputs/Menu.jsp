@@ -60,15 +60,15 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/PollHub/EditPollsController">Edit Polls</a>
+                        <a class="nav-link" href="/PollHub/ManagePollsController">Manage Polls</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/PollHub/ViewPollsController">View Active Polls</a>
+                        <a class="nav-link" href="/PollHub/ViewPollsController">Community Polls</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
+                        <a class="nav-link" href="/PollHub/LogoutController">Logout</a>
                     </li>
                 </ul>
             </div>

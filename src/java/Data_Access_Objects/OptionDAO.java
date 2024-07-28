@@ -64,7 +64,7 @@ public class OptionDAO {
         return true;
     }//end
 
-    //increase the number of votes for an whenever it gets clicked on
+    //Increase the number of votes for an whenever it gets clicked on
     public boolean increaseOptionVoteCount(int optionId, int currentVoteCount) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE pollhubdb.option "
                 + "SET VoteCount = ? "
@@ -81,7 +81,7 @@ public class OptionDAO {
         return true;
     }//end
 
-    //get the number of votes for a particular poll option
+    //Get the number of votes for a particular poll option
     public int getOptionVoteCount(int optionId) throws SQLException, ClassNotFoundException {
         String sql = "SELECT VoteCount FROM pollhubdb.option "
                 + "WHERE Option_Id = ?";

@@ -22,7 +22,7 @@ public class OptionService {
         return optionDao.getOptionVoteCount(optionId);
     }//end
 
-    public boolean increaseOptionVoteCount(int optionId, int currentVoteCount) throws SQLException, ClassNotFoundException {
+    public boolean vote(int optionId, int currentVoteCount) throws SQLException, ClassNotFoundException {
         return optionDao.increaseOptionVoteCount(optionId, currentVoteCount);
     }//end
 

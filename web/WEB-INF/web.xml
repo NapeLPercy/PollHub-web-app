@@ -21,8 +21,8 @@
         <servlet-class>Controllers.VoteController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EditPollsController</servlet-name>
-        <servlet-class>Controllers.EditPollsController</servlet-class>
+        <servlet-name>ManagePollsController</servlet-name>
+        <servlet-class>Controllers.ManagePollsController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RenderUserPollsController</servlet-name>
@@ -39,6 +39,10 @@
     <servlet>
         <servlet-name>ActivatePollController</servlet-name>
         <servlet-class>Controllers.ActivatePollController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>Controllers.LogoutController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CreatePollController</servlet-name>
@@ -61,8 +65,8 @@
         <url-pattern>/VoteController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>EditPollsController</servlet-name>
-        <url-pattern>/EditPollsController</url-pattern>
+        <servlet-name>ManagePollsController</servlet-name>
+        <url-pattern>/ManagePollsController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RenderUserPollsController</servlet-name>
@@ -79,5 +83,9 @@
     <servlet-mapping>
         <servlet-name>ActivatePollController</servlet-name>
         <url-pattern>/ActivatePollController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/LogoutController</url-pattern>
     </servlet-mapping>
 </web-app>

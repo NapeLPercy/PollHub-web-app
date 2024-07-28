@@ -37,7 +37,7 @@ public class CreatePollController extends HttpServlet {
             ArrayList<Option> pollOptions = pollService.getPollOptions(options);
             Poll poll = new Poll(question, "Active", topic, new Date(), pollVotes, pollOptions);
 
-            int user_id = 1673;
+            int user_id = Integer.parseInt(request.getSession().getAttribute("userId").toString());
             boolean isAdded = pollService.addPoll(poll, user_id);
 
         } catch (SQLException | ClassNotFoundException ex) {

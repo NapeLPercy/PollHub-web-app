@@ -1,5 +1,6 @@
 package Controllers;
 
+import Entities.Poll;
 import Services.PollService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -7,11 +8,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.JSONObject;
 
-public class ActivatePollController extends HttpServlet {
+public class ManagePollsController extends HttpServlet {
 
     private PollService pollService;
 
@@ -19,20 +20,18 @@ public class ActivatePollController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String id = request.getParameter("id");
-
         try {
             pollService = new PollService();
-            boolean isUpdated = pollService.updatePollStatus(id, "Active");
 
-            JSONObject obj = new JSONObject();
-            obj.put("isUpdated", isUpdated);
+            String userId = (String) request.getSession().getAttribute("userId");
+            ArrayList<Poll> polls = pollService.getMyPolls(userId);
 
-            response.getWriter().write(obj.toString());
-            
+            request.setAttribute("polls", polls);
+
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ActivatePollController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManagePollsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
 
+        request.getRequestDispatcher("/Views/Outputs/ProcessPolls.jsp").forward(request, response);
+    }
 }

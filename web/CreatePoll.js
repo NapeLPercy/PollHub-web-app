@@ -1,7 +1,5 @@
 //adding another input field and button
-
 const add_option_btn = document.getElementById("add_option");
-const options_container = document.getElementById("options_container");
 
 add_option_btn.addEventListener("click", (event) => {
     event.preventDefault();
@@ -9,15 +7,16 @@ add_option_btn.addEventListener("click", (event) => {
 });
 
 // Event delegation to handle click on dynamically added delete buttons
-options_container.addEventListener("click", (event) => {
-    if (event.target && event.target.classList.contains("delete_input")) {
-        // Remove the corresponding input and delete button
-        const optionWrapper = event.target.closest(".option_wrapper");
-        if (optionWrapper) {
-            optionWrapper.remove();
-        }
-    }
-});
+document.getElementById("options_container")
+        .addEventListener("click", (event) => {
+            if (event.target && event.target.classList.contains("delete_input")) {
+                // Remove the corresponding input and delete button
+                const optionWrapper = event.target.closest(".option_wrapper");
+                if (optionWrapper) {
+                    optionWrapper.remove();
+                }
+            }
+        });
 
 const createOption = () => {
     // Create a wrapper div for each option input and delete button
@@ -39,10 +38,10 @@ const createOption = () => {
     optionWrapper.appendChild(option_input);
     optionWrapper.appendChild(delete_input);
 
-    options_container.appendChild(optionWrapper);
+    document.getElementById("options_container").appendChild(optionWrapper);
 };
 
-//validating user input
+//Validating user input
 // Validate user input
 
 const question = document.getElementById("question");
@@ -60,7 +59,7 @@ createPollBtn.addEventListener("click", (event) => {
 
     // Validate question field
     if (question.value === "") {
-        updateUi(questionError, "You must enter a poll question");
+        updateUi(questionError, "Poll question is required.");
         valid = false;
     } else {
         updateUi(questionError, "");
@@ -68,10 +67,10 @@ createPollBtn.addEventListener("click", (event) => {
 
     // Validate options fields
     const options = optionsContainer.querySelectorAll("input");
-    console.log(options);
+
     options.forEach(option => {
         if (option.value === "") {
-            updateUi(optionError, "All option fields must be entered");
+            updateUi(optionError, "Option(s) field is required.");
             valid = false;
         } else {
             updateUi(optionError, "");
@@ -84,8 +83,14 @@ createPollBtn.addEventListener("click", (event) => {
     }
 });
 
-//update ui
+//Update ui
 function updateUi(element, message) {
     element.innerText = message;
     element.style.color = "red";
 }
+
+document.querySelector("#question")
+        .addEventListener("focus", (event) => {
+            event.target.previousElementSibling.innerText = "";
+        });
+

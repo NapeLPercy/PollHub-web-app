@@ -37,8 +37,8 @@ public class VoteController extends HttpServlet {
 
             int beforeVoteCount = voteService.getOptionService().getOptionVoteCount(optionId);
             
-            //USER VOTE FOR A CERTAIN POLL OPTION
-            boolean didVote = voteService.getOptionService().increaseOptionVoteCount(optionId, beforeVoteCount);
+            //User cast a vote on a poll by clicking on an option
+            boolean didVote = voteService.getOptionService().vote(optionId, beforeVoteCount);
             
             //ADD THE USER_ID AND POLL_ID AND THE CHOSEN OPTION TO THE VOTE TABLE
             //USE OPTION ID TO GET THE OPTION

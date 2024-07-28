@@ -1,37 +1,36 @@
-const username = document.getElementById("username");
-const password = document.getElementById("password");
-const login_btn = document.getElementById("login_btn");
-const username_error = document.getElementById("username_error");
-const password_error = document.getElementById("password_error");
-const invalid_login = document.getElementById("invalid_login");
+document.getElementById("login_btn")
+        .addEventListener("click", (event) => {
+            event.preventDefault();
 
+            var password = document.getElementById("password");
+            var password_error = document.getElementById("password_error");
+            const username = document.getElementById("username");
+            const username_error = document.getElementById("username_error");
+            var invalid_login = document.getElementById("invalid_login");
 
-login_btn.addEventListener("click", (event) => {
-    event.preventDefault();
+            if (username.value === "" && password.value === "") {
+                updateErrorView(username_error, "Username is required.");
+                updateErrorView(password_error, "Password is required.");
 
-    if (username.value === "" && password.value === "") {
-        updateErrorView(username_error, "You must enter a username");
-        updateErrorView(password_error, "You must enter a password");
+            } else if (password.value === "") {
+                updateErrorView(password_error, "Password is required.");
 
-    } else if (password.value === "") {
-        updateErrorView(password_error, "You must enter a password");
+            } else if (username.value === "") {
+                updateErrorView(username_error, "Username is required.");
+            } else
+            {
+                updateErrorView(password_error, "");
+                updateErrorView(username_error, "");
+                login(username.value, password.value, invalid_login);
+            }
 
-    } else if (username.value === "") {
-        updateErrorView(username_error, "You must enter a username");
-    } else
-    {
-        updateErrorView(password_error, "");
-        updateErrorView(username_error, "");
-        login(username.value, password.value, invalid_login);
-    }
-
-});
+        });
 
 
 const login = (username, password, element) => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "/PollHub/LoginController?username=" + encodeURIComponent(username) +
-  "&password=" + encodeURIComponent(password),true);
+            "&password=" + encodeURIComponent(password), true);
 
     const loginData = {
         username: username,
@@ -46,7 +45,7 @@ const login = (username, password, element) => {
             if (data.valid) {
                 document.querySelector("form").submit();
             } else {
-                updateErrorView(element, "Wrong username or password");
+                updateErrorView(element, "Wrong Username or Password.");
             }
         }
     };
@@ -54,8 +53,15 @@ const login = (username, password, element) => {
     xhr.send();
 };
 
+
 function updateErrorView(element_name, error_message) {
     element_name.style.color = "red";
     element_name.innerText = error_message;
 }
 
+document.querySelectorAll("input")
+        .forEach(element => {
+            element.addEventListener("focus", (event) => {
+                event.target.previousElementSibling.innerText = "";
+            });
+        });

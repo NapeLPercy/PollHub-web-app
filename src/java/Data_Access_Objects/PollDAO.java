@@ -65,6 +65,7 @@ public class PollDAO {
         return true;
     }//end
 
+    //Get all active polls
     public ArrayList<Poll> getAllPolls() throws SQLException, ClassNotFoundException {
         String sql = "SELECT p.poll_id, p.question, p.status, p.topic, p.user_id, o.option_id, o.optiontext, o.votecount "
                 + "FROM pollhubdb.poll p "
@@ -169,7 +170,7 @@ public class PollDAO {
         return new ArrayList<>(pollMap.values());
     }//end
     
-//get 
+   //Returns list of current user's polls
     public int getTotalPollVoteCount(int pollId) throws SQLException, ClassNotFoundException {
         String sql = "SELECT SUM(VoteCount) total FROM pollhubdb.option "
                 + "WHERE Poll_Id = ?";
